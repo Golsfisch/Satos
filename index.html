@@ -3,46 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Wonder — High-End Classic Layout</title>
+<title>Tech Wonder — Collapsible Sidebar</title>
 <style>
-/* Reset & base */
-body, h1,h2,h3,p,ul {margin:0; padding:0;}
+/* Base reset */
+body, h1,h2,h3,p,ul {margin:0;padding:0;}
 ul {list-style:none;}
 body {
     font-family: Arial, sans-serif;
     background:#0b2a4e;
     color:#f0f0f0;
     display:flex;
+    transition: margin-left 0.3s;
 }
+
+/* Sidebar */
 #sidebar {
-    width:200px;
+    position: fixed;
+    left:0; top:0; bottom:0;
+    width:220px;
     background:#1f2a3a;
     display:flex;
     flex-direction:column;
     padding-top:20px;
-    min-height:100vh;
+    transition: transform 0.3s;
+    z-index:1000;
 }
-#sidebar button {
+#sidebar button.tab-btn {
     border:none;
     background:none;
     color:#9aa0b0;
     text-align:left;
-    padding:15px 20px;
+    padding:14px 20px;
     cursor:pointer;
     font-size:15px;
     transition:0.3s;
 }
-#sidebar button:hover, #sidebar button.active {background:#ff6b8a; color:white;}
-#sidebar .toggle {margin-top:auto; padding:12px 20px; border-top:1px solid #555; cursor:pointer; text-align:center; font-weight:bold;}
+#sidebar button.tab-btn:hover, #sidebar button.tab-btn.active {
+    background:#ff6b8a;
+    color:white;
+}
+#sidebar .toggle, #sidebar .collapse-btn {
+    margin-top:auto;
+    padding:12px 20px;
+    border-top:1px solid #555;
+    cursor:pointer;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* Collapsed sidebar */
+#sidebar.collapsed {
+    transform: translateX(-220px);
+}
+
+/* Content */
 .content {
     flex:1;
     padding:30px;
-    max-width:1000px;
+    margin-left:220px;
+    transition: margin-left 0.3s;
 }
-section.page {display:none; animation:fadeIn 0.4s;}
+.content.collapsed {
+    margin-left:0;
+}
+
+/* Pages */
+section.page {display:none;}
 section.page.active {display:block;}
-@keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
-h1,h2,h3 {margin-bottom:10px;}
+
+/* Cards */
 .card {
     background:#1f2a3a;
     padding:20px;
@@ -51,31 +80,26 @@ h1,h2,h3 {margin-bottom:10px;}
     box-shadow:0 8px 20px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.card:hover {transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,0,0,0.6);}
-.button {padding:10px 16px; border-radius:8px; border:none; cursor:pointer; margin-top:10px; transition:0.3s;}
-.primary {background:#ff6b8a; color:white;}
+.card:hover {transform:translateY(-5px); box-shadow:0 12px 24px rgba(0,0,0,0.6);}
+.button {padding:10px 16px; border-radius:8px; border:none; cursor:pointer; margin-top:10px;}
+.primary {background:#ff6b8a;color:white;}
 .primary:hover {background:#ff4d70;}
-.ghost {background:transparent; border:1px solid #9aa0b0; color:#f0f0f0;}
+.ghost {background:transparent;border:1px solid #9aa0b0;color:#f0f0f0;}
 .ghost:hover {background:#333;}
-.products-grid {
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-}
+.products-grid {display:flex; flex-wrap:wrap; gap:20px;}
 .products-grid .card {flex:1 1 calc(50% - 20px);}
-footer {text-align:center; color:#9aa0b0; margin-top:40px; font-size:14px;}
-/* Dark mode */
-body.light {background:#f3f3f3; color:#0b2a4e;}
-body.light .card {background:#ffffff; color:#0b2a4e; box-shadow:0 8px 20px rgba(0,0,0,0.12);}
-body.light #sidebar {background:#e0e0e0;}
-body.light #sidebar button {color:#555;}
-body.light #sidebar button.active, body.light #sidebar button:hover {background:#ff6b8a; color:white;}
-body.light .ghost {border:1px solid #555; color:#0b2a4e;}
-body.light .ghost:hover {background:#ddd;}
-body.light .primary:hover {background:#ff4d70;}
+
+/* Strawberry link */
+.strawberry-link img {width:50px;height:50px;transition: transform 0.3s;}
+.strawberry-link img:hover {transform:scale(1.2);}
+
+/* Footer */
+footer {text-align:center;color:#9aa0b0;margin-top:40px;font-size:14px;}
+
+/* Responsive */
 @media(max-width:800px){
-    #sidebar {position:relative;width:100%; flex-direction:row; overflow-x:auto;}
-    .content {margin:0; padding:20px;}
+    #sidebar {position:fixed; width:180px;}
+    .content {margin-left:0;}
     .products-grid .card {flex:1 1 100%;}
 }
 </style>
@@ -91,83 +115,38 @@ body.light .primary:hover {background:#ff4d70;}
     <button class="tab-btn" data-page="chatbots">Chatbots</button>
     <button class="tab-btn" data-page="contact">Contact</button>
     <button class="toggle" id="themeToggle">ON/OFF</button>
+    <button class="collapse-btn" id="sidebarToggle">☰</button>
 </div>
 
-<div class="content">
+<div class="content" id="content">
 
 <section id="home" class="page active">
     <h1>Welcome to Tech Wonder</h1>
-    <p>High-end classic layout with placeholders for products, ready for expansion.</p>
-    <button class="button primary" onclick="alert('Wonderfly Pre-launch!')">Get Wonderfly</button>
-    <button class="button ghost" onclick="alert('Book demo')">Book Demo</button>
+    <p>High-end classic UI/UX with a collapsible sidebar and strawberry icon.</p>
+    <a href="#products" class="strawberry-link"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg" alt="Strawberry Icon" title="Strawberry'sGPT"></a>
 </section>
 
 <section id="products" class="page">
     <h2>Products</h2>
     <div class="products-grid">
-        <div class="card">
-            <h3>Product 1</h3>
-            <p>Status: Placeholder</p>
-            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
+        <div class="card" id="product-strawberry">
+            <h3>Strawberry'sGPT</h3>
+            <p>Status: Pre-launch</p>
+            <ul><li>Custom AI Support</li><li>Live Chat</li></ul>
             <button class="button primary">Learn More</button>
         </div>
-        <div class="card">
-            <h3>Product 2</h3>
-            <p>Status: Placeholder</p>
-            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
-            <button class="button primary">Learn More</button>
-        </div>
-        <div class="card">
-            <h3>Product 3</h3>
-            <p>Status: Placeholder</p>
-            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
-            <button class="button primary">Learn More</button>
-        </div>
-        <div class="card">
-            <h3>Product 4</h3>
-            <p>Status: Placeholder</p>
-            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
-            <button class="button primary">Learn More</button>
-        </div>
-        <div class="card">
-            <h3>Product 5</h3>
-            <p>Status: Placeholder</p>
-            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
-            <button class="button primary">Learn More</button>
-        </div>
+        <div class="card"><h3>Product 2</h3><p>Status: Placeholder</p></div>
+        <div class="card"><h3>Product 3</h3><p>Status: Placeholder</p></div>
+        <div class="card"><h3>Product 4</h3><p>Status: Placeholder</p></div>
+        <div class="card"><h3>Product 5</h3><p>Status: Placeholder</p></div>
     </div>
 </section>
 
-<section id="pricing" class="page">
-    <h2>Pricing</h2>
-    <div class="card">
-        <h3>Starter Plan</h3>
-        <p>$9/month</p>
-        <ul><li>Basic widgets</li><li>Up to 10k events/month</li><li>Email support</li></ul>
-        <button class="button primary">Start</button>
-    </div>
-</section>
-
-<section id="game" class="page">
-    <h2>Game Portal</h2>
-    <p>Placeholder for Game Portal content.</p>
-</section>
-
-<section id="stacking" class="page">
-    <h2>Stacking Platform</h2>
-    <p>Placeholder for Stacking Platform content.</p>
-</section>
-
-<section id="chatbots" class="page">
-    <h2>Chatbots</h2>
-    <p>Placeholder for Chatbot AI products.</p>
-</section>
-
-<section id="contact" class="page">
-    <h2>Contact</h2>
-    <p>Contact form or information goes here.</p>
-    <button class="button primary" onclick="alert('Contact form coming soon')">Contact</button>
-</section>
+<section id="pricing" class="page"><h2>Pricing</h2></section>
+<section id="game" class="page"><h2>Game Portal</h2></section>
+<section id="stacking" class="page"><h2>Stacking Platform</h2></section>
+<section id="chatbots" class="page"><h2>Chatbots</h2></section>
+<section id="contact" class="page"><h2>Contact</h2></section>
 
 <footer>
 <p>© <span id="year"></span> Tech Wonder — anonymous collective</p>
@@ -177,7 +156,7 @@ body.light .primary:hover {background:#ff4d70;}
 // Set year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Tab navigation
+// Tabs
 var tabs = document.querySelectorAll('.tab-btn');
 var pages = document.querySelectorAll('section.page');
 tabs.forEach(function(tab){
@@ -190,9 +169,27 @@ tabs.forEach(function(tab){
     });
 });
 
-// On/Off dark mode toggle
+// Dark/Light ON-OFF
 document.getElementById('themeToggle').onclick = function(){
     document.body.classList.toggle('light');
+};
+
+// Sidebar collapse
+var sidebar = document.getElementById('sidebar');
+var content = document.getElementById('content');
+document.getElementById('sidebarToggle').onclick = function(){
+    sidebar.classList.toggle('collapsed');
+    content.classList.toggle('collapsed');
+};
+
+// Strawberry link
+document.querySelector('.strawberry-link').onclick = function(e){
+    e.preventDefault();
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('products').classList.add('active');
+    tabs.forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-page="products"]').classList.add('active');
+    document.getElementById('product-strawberry').scrollIntoView({behavior:'smooth'});
 };
 </script>
 
