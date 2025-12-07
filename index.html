@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Wonder — Collapsible Sidebar</title>
+<title>Tech Wonder — Strawberry Hero</title>
 <style>
 /* Base reset */
 body, h1,h2,h3,p,ul {margin:0;padding:0;}
@@ -12,23 +12,24 @@ body {
     font-family: Arial, sans-serif;
     background:#0b2a4e;
     color:#f0f0f0;
-    display:flex;
-    transition: margin-left 0.3s;
+    overflow-x:hidden;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* Sidebar */
 #sidebar {
     position: fixed;
-    left:0; top:0; bottom:0;
+    top:0; left:0;
     width:220px;
+    height:100%;
     background:#1f2a3a;
-    display:flex;
-    flex-direction:column;
     padding-top:20px;
+    transform: translateX(-220px); /* hidden by default */
     transition: transform 0.3s;
     z-index:1000;
 }
 #sidebar button.tab-btn {
+    width:100%;
     border:none;
     background:none;
     color:#9aa0b0;
@@ -42,34 +43,52 @@ body {
     background:#ff6b8a;
     color:white;
 }
-#sidebar .toggle, #sidebar .collapse-btn {
-    margin-top:auto;
-    padding:12px 20px;
-    border-top:1px solid #555;
-    cursor:pointer;
-    text-align:center;
-    font-weight:bold;
-}
 
-/* Collapsed sidebar */
-#sidebar.collapsed {
-    transform: translateX(-220px);
+/* Sidebar mid toggle button */
+#sidebarToggle {
+    position: absolute;
+    right:-30px;
+    top:50%;
+    transform:translateY(-50%);
+    width:30px;
+    height:60px;
+    background:#ff6b8a;
+    border:none;
+    border-radius:0 5px 5px 0;
+    color:white;
+    cursor:pointer;
+    font-size:20px;
+    z-index:1001;
 }
 
 /* Content */
 .content {
-    flex:1;
+    margin-left:0;
     padding:30px;
-    margin-left:220px;
     transition: margin-left 0.3s;
 }
-.content.collapsed {
-    margin-left:0;
+
+/* Sidebar shown */
+#sidebar.show {
+    transform: translateX(0);
 }
 
 /* Pages */
-section.page {display:none;}
+section.page {display:none; animation:fadeIn 0.4s;}
 section.page.active {display:block;}
+@keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
+
+/* Strawberry hero */
+#home .strawberry-hero {
+    font-size:15vw; /* big */
+    text-align:center;
+    margin-top:10vh;
+    cursor:pointer;
+    transition: transform 0.3s;
+}
+#home .strawberry-hero:hover {
+    transform: scale(1.2);
+}
 
 /* Cards */
 .card {
@@ -89,23 +108,29 @@ section.page.active {display:block;}
 .products-grid {display:flex; flex-wrap:wrap; gap:20px;}
 .products-grid .card {flex:1 1 calc(50% - 20px);}
 
-/* Strawberry link */
-.strawberry-link img {width:50px;height:50px;transition: transform 0.3s;}
-.strawberry-link img:hover {transform:scale(1.2);}
-
 /* Footer */
 footer {text-align:center;color:#9aa0b0;margin-top:40px;font-size:14px;}
 
-/* Responsive */
+/* Light Mode */
+body.light {background:#f3f3f3; color:#0b2a4e;}
+body.light .card {background:#ffffff;color:#0b2a4e;box-shadow:0 8px 20px rgba(0,0,0,0.12);}
+body.light #sidebar {background:#e0e0e0;}
+body.light #sidebar button.tab-btn {color:#555;}
+body.light #sidebar button.tab-btn.active, body.light #sidebar button.tab-btn:hover {background:#ff6b8a;color:white;}
+body.light .ghost {border:1px solid #555;color:#0b2a4e;}
+body.light .ghost:hover {background:#ddd;}
+body.light .primary:hover {background:#ff4d70;}
+
 @media(max-width:800px){
-    #sidebar {position:fixed; width:180px;}
-    .content {margin-left:0;}
+    #sidebar {width:180px;}
+    #sidebarToggle {right:-25px;}
     .products-grid .card {flex:1 1 100%;}
 }
 </style>
 </head>
 <body id="body">
 
+<!-- Sidebar -->
 <div id="sidebar">
     <button class="tab-btn active" data-page="home">Home</button>
     <button class="tab-btn" data-page="products">Products</button>
@@ -115,15 +140,15 @@ footer {text-align:center;color:#9aa0b0;margin-top:40px;font-size:14px;}
     <button class="tab-btn" data-page="chatbots">Chatbots</button>
     <button class="tab-btn" data-page="contact">Contact</button>
     <button class="toggle" id="themeToggle">ON/OFF</button>
-    <button class="collapse-btn" id="sidebarToggle">☰</button>
+    <button id="sidebarToggle">☰</button>
 </div>
 
+<!-- Content -->
 <div class="content" id="content">
-
 <section id="home" class="page active">
-    <h1>Welcome to Tech Wonder</h1>
-    <p>High-end classic UI/UX with a collapsible sidebar and strawberry icon.</p>
-    <a href="#products" class="strawberry-link"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg" alt="Strawberry Icon" title="Strawberry'sGPT"></a>
+    <h1 style="text-align:center;">Welcome to Tech Wonder</h1>
+    <div class="strawberry-hero" id="strawberryHero">🍓</div>
+    <p style="text-align:center;">Click the strawberry to go to Strawberry'sGPT product.</p>
 </section>
 
 <section id="products" class="page">
@@ -156,7 +181,7 @@ footer {text-align:center;color:#9aa0b0;margin-top:40px;font-size:14px;}
 // Set year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Tabs
+// Tab navigation
 var tabs = document.querySelectorAll('.tab-btn');
 var pages = document.querySelectorAll('section.page');
 tabs.forEach(function(tab){
@@ -169,22 +194,20 @@ tabs.forEach(function(tab){
     });
 });
 
-// Dark/Light ON-OFF
+// Dark/light toggle
 document.getElementById('themeToggle').onclick = function(){
     document.body.classList.toggle('light');
 };
 
-// Sidebar collapse
+// Sidebar show/hide
 var sidebar = document.getElementById('sidebar');
-var content = document.getElementById('content');
-document.getElementById('sidebarToggle').onclick = function(){
-    sidebar.classList.toggle('collapsed');
-    content.classList.toggle('collapsed');
+var sidebarBtn = document.getElementById('sidebarToggle');
+sidebarBtn.onclick = function(){
+    sidebar.classList.toggle('show');
 };
 
-// Strawberry link
-document.querySelector('.strawberry-link').onclick = function(e){
-    e.preventDefault();
+// Strawberry click
+document.getElementById('strawberryHero').onclick = function(){
     pages.forEach(p => p.classList.remove('active'));
     document.getElementById('products').classList.add('active');
     tabs.forEach(t => t.classList.remove('active'));
