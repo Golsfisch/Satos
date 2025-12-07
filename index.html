@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tech Wonder — Wonderfly · Strawberry'sGPT · Game Portal · Stacking</title>
+  <meta name="description" content="Tech Wonder — next-gen tools: Wonderfly payments, Strawberry'sGPT chatbots, Game Portal hosting, and a Stacking platform. Enterprise-grade, privacy-first." />
+  <meta name="author" content="Tech Wonder" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23345'/%3E%3Ctext x='50' y='57' font-size='48' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3E TW %3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#0b2a4e" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tech Wonder — Wonderfly, Strawberry'sGPT, Game Portal, Stacking" />
+  <meta property="og:description" content="Payments, AI support bots, games hosting and stacking — by Tech Wonder." />
+  <meta property="og:type" content="website" />
+
+  <!-- Structured data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Tech Wonder",
+    "url": "https://example.com",
+    "logo": "https://example.com/logo.png",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Minimal stylesheet (scoped to site). Responsive + accessible -->
+  <style>
+    :root{
+      --bg:#0b2a4e; --card:#ffffff; --muted:#6b7280; --accent:#ff6b8a; --accent-2:#5ce1c6;
+      --gap:clamp(12px,2vw,28px); --radius:14px; --maxw:1100px;
+      --shadow: 0 8px 20px rgba(11,42,78,0.12);
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#f6f9ff 0%, #fff 100%);
+      color:#0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .site{
+      width:100%;
+      max-width:var(--maxw);
+      margin:0 auto;
+    }
+
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--gap);
+      margin-bottom:var(--gap);
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      display:grid;place-items:center;color:white;
+      background:linear-gradient(135deg,var(--accent),#ff8aa6);
+      font-weight:700;font-size:18px;box-shadow:var(--shadow);
+    }
+    nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+    nav a:hover{color:#0f1724}
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:var(--gap);
+      align-items:center;
+      background:transparent;
+      margin-bottom:var(--gap);
+    }
+    .hero-card{
+      background:linear-gradient(180deg,#ffffffef, #ffffff);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    h1{font-size:clamp(26px,3.4vw,40px);margin:0 0 8px 0}
+    p.lead{color:var(--muted);margin:0 0 18px 0}
+
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      appearance:none;border:0;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;
+      display:inline-flex;align-items:center;gap:10px;
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff8aa6);color:white;box-shadow:0 6px 18px rgba(255,107,138,0.2)}
+    .btn-ghost{background:transparent;border:1px solid #e6e9ee;color:#0b2a4e}
+
+    .hero-side{min-width:260px;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+    .product-snapshot{background:#fff;border-radius:12px;padding:12px;width:100%;box-shadow:0 6px 20px rgba(11,42,78,0.06)}
+    .product-snapshot strong{display:block}
+
+    /* Product grid */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+    .card{
+      background:var(--card);border-radius:12px;padding:18px;box-shadow:var(--shadow);
+      display:flex;flex-direction:column;gap:12px;
+    }
+    .card h3{margin:0;font-size:18px}
+    .price{font-size:20px;font-weight:800}
+    .features{color:var(--muted);font-size:14px;margin:0;padding-left:0;list-style:none}
+
+    /* Pricing & checkout */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+      background:rgba(6,10,19,0.45);z-index:1200;padding:24px;
+    }
+    .modal.open{display:flex}
+    .modal-card{background:white;border-radius:12px;padding:20px;max-width:520px;width:100%;box-shadow:0 30px 80px rgba(2,6,23,0.5)}
+    .close-btn{background:transparent;border:0;font-size:18px;cursor:pointer;color:var(--muted)}
+
+    /* Footer */
+    footer{margin-top:28px;padding:18px;border-radius:12px;background:#fff;box-shadow:var(--shadow);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Utilities */
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#f3f7ff;font-weight:700;color:#0b2a4e;font-size:13px}
+
+    /* Responsive tweaks */
+    @media (max-width:780px){
+      .hero{grid-template-columns:1fr;align-items:stretch}
+      nav{display:none}
+      .brand{gap:10px}
+      body{padding:14px}
+    }
+
+    /* Accessibility focus */
+    a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(83, 123, 255, 0.18);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <div class="site" id="site-root">
+    <header role="banner" aria-label="Tech Wonder header">
+      <a href="#home" class="brand" aria-label="Tech Wonder homepage">
+        <div class="logo" aria-hidden="true">TW</div>
+        <div>
+          <div style="font-weight:800">Tech Wonder</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Anonymous, privacy-first technology</div>
+        </div>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <a href="#products">Products</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#docs">Docs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main id="home" class="hero" role="main" aria-labelledby="main-heading">
+      <section class="hero-card" aria-labelledby="main-heading">
+        <h1 id="main-heading">Build & sell with confidence — payments, AI bots, games, and stacking</h1>
+        <p class="lead">Tech Wonder combines secure payments (**Wonderfly**), smart chatbots (**Strawberry'sGPT**), immersive games, and a stacking rewards platform — packaged to get you to market fast.</p>
+
+        <div class="cta-row" role="region" aria-label="Primary call to actions">
+          <button class="btn btn-primary" id="buy-wonderfly" data-product="wonderfly" aria-haspopup="dialog">Get Wonderfly</button>
+          <button class="btn btn-ghost" id="book-demo">Book a demo</button>
+        </div>
+
+        <p style="margin-top:14px;color:var(--muted);font-size:13px">Privacy-first by design • Enterprise-ready APIs • Anonymous team</p>
+      </section>
+
+      <aside class="hero-side" aria-labelledby="snapshot-heading">
+        <div style="text-align:right"><span class="pill">Beta</span></div>
+        <div class="product-snapshot" role="region" aria-labelledby="snapshot-heading">
+          <strong id="snapshot-heading">Featured product — Strawberry'sGPT</strong>
+          <div style="color:var(--muted);font-size:14px;margin-top:6px">
+            Pre-trained support assistants, web-chat widgets, and custom flows. Integrates with Wonderfly to accept payments inside chat.
+          </div>
+        </div>
+
+        <div class="product-snapshot" aria-hidden="false">
+          <strong>Wonderfly (Payments)</strong>
+          <div style="color:var(--muted);font-size:13px;margin-top:6px">Mock demo checkout included below. Replace with your provider in production.</div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- PRODUCTS -->
+    <section id="products" aria-labelledby="products-heading" style="margin-bottom:var(--gap)">
+      <h2 id="products-heading" style="margin:0 0 12px 0">Products</h2>
+
+      <div class="grid" role="list">
+        <article class="card" role="listitem" aria-labelledby="p1-title">
+          <div style="display:flex;justify-content:space-between;align-items:start;">
+            <h3 id="p1-title">Wonderfly — Payment system</h3>
+            <div class="price">$0.00<span style="font-weight:600;font-size:12px;color:var(--muted);margin-left:6px">demo</span></div>
+          </div>
+          <p class="muted">A lightweight, privacy-focused payment orchestration layer. Use it to accept payments, subscriptions, and in-chat microtransactions.</p>
+          <ul class="features">
+            <li>Hosted checkout / API-first</li>
+            <li>Subscriptions & one-click refunds</li>
+            <li>PCI-compliance-ready integrations (plug your provider)</li>
+          </ul>
+          <div style="margin-top:auto;display:flex;gap:8px;">
+            <button class="btn btn-primary" data-product="wonderfly" aria-label="Buy Wonderfly">Buy / Try</button>
+            <button class="btn btn-ghost" data-product-info="wonderfly" aria-label="Learn more about Wonderfly">Learn</button>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="p2-title">
+          <h3 id="p2-title">Strawberry'sGPT — Support & Chatbots</h3>
+          <p class="muted">Pre-built customer support GPTs, live-chat handoff, analytics, and easy website embedding.</p>
+          <ul class="features">
+            <li>Custom intents and fallback routing</li>
+            <li>Human handoff + channels (web, widget)</li>
+            <li>Billing via Wonderfly</li>
+          </ul>
+          <div style="margin-top:auto;display:flex;gap:8px;">
+            <button class="btn btn-primary" data-product="strawberry" aria-label="Buy Strawberry'sGPT">Buy</button>
+            <button class="btn btn-ghost" data-product-info="strawberry" aria-label="Learn more about Strawberry'sGPT">Learn</button>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="p3-title">
+          <h3 id="p3-title">Game Portal — Hosted game site</h3>
+          <p class="muted">Host and monetize browser games, leaderboards, achievements, and cross-game wallets.</p>
+          <ul class="features">
+            <li>Fast deploy pipeline for HTML5 games</li>
+            <li>In-game purchases via Wonderfly</li>
+            <li>Player analytics & moderation tools</li>
+          </ul>
+          <div style="margin-top:auto;display:flex;gap:8px;">
+            <button class="btn btn-primary" data-product="game" aria-label="Buy Game Portal">Buy</button>
+            <button class="btn btn-ghost" data-product-info="game" aria-label="Learn more about Game Portal">Learn</button>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="p4-title">
+          <h3 id="p4-title">Stacking Platform — Rewards & yield</h3>
+          <p class="muted">Subscription stacking, rewards, and tiered access. Built for creators and communities.</p>
+          <ul class="features">
+            <li>Tiered subscriptions & compounding rewards</li>
+            <li>API & embeddable widgets</li>
+            <li>Secure payouts (integrate with Wonderfly)</li>
+          </ul>
+          <div style="margin-top:auto;display:flex;gap:8px;">
+            <button class="btn btn-primary" data-product="stacking" aria-label="Buy Stacking Platform">Buy</button>
+            <button class="btn btn-ghost" data-product-info="stacking" aria-label="Learn more about Stacking Platform">Learn</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" aria-labelledby="pricing-heading" style="margin-bottom:var(--gap)">
+      <h2 id="pricing-heading">Pricing (high-level)</h2>
+      <div class="grid">
+        <div class="card" role="region" aria-label="Starter plan">
+          <h3>Starter</h3>
+          <div class="price">$9</div>
+          <div class="muted">per month</div>
+          <ul class="features">
+            <li>Basic widgets</li>
+            <li>Up to 10k events/month</li>
+            <li>Email support</li>
+          </ul>
+          <div style="margin-top:auto"><button class="btn btn-primary" data-product="starter">Start Free</button></div>
+        </div>
+
+        <div class="card" role="region" aria-label="Pro plan">
+          <h3>Pro</h3>
+          <div class="price">$49</div>
+          <div class="muted">per month</div>
+          <ul class="features">
+            <li>All starter features</li>
+            <li>Custom bots & webhooks</li>
+            <li>Priority support</li>
+          </ul>
+          <div style="margin-top:auto"><button class="btn btn-primary" data-product="pro">Buy Pro</button></div>
+        </div>
+
+        <div class="card" role="region" aria-label="Enterprise plan">
+          <h3>Enterprise</h3>
+          <div class="price">Contact</div>
+          <div class="muted">custom pricing</div>
+          <ul class="features">
+            <li>On-prem or private cloud</li>
+            <li>SLAs & compliance</li>
+            <li>Dedicated success manager</li>
+          </ul>
+          <div style="margin-top:auto"><button class="btn btn-ghost" id="contact-enterprise">Contact Sales</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCS (brief) -->
+    <section id="docs" aria-labelledby="docs-heading" style="margin-bottom:var(--gap)">
+      <h2 id="docs-heading">Docs & integration</h2>
+      <div class="card" style="display:flex;gap:18px;flex-direction:column">
+        <p class="muted">Everything is API-first. We provide SDKs for frontend and backend languages, plus embeddable widgets for quick setup. Example integration snippets are available inside your account.</p>
+        <details>
+          <summary style="cursor:pointer;font-weight:700">Example — embed Strawberry'sGPT widget</summary>
+          <pre style="white-space:pre-wrap;background:#f6f8fb;padding:12px;border-radius:8px;margin:12px 0;overflow:auto">
+&lt;script async&gt;
+  (function(w){if(w.__TW) return; w.__TW = {key:'YOUR_CLIENT_KEY'}; var s = document.createElement('script'); s.src = 'https://cdn.example.com/strawberry-widget.js'; s.async = true; document.head.appendChild(s);
+  })(window);
+&lt;/script&gt;
+          </pre>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-heading" style="margin-bottom:var(--gap)">
+      <h2 id="contact-heading">Contact & demo</h2>
+      <div class="grid">
+        <form id="contact-form" class="card" aria-label="Contact form" onsubmit="return false;">
+          <label>
+            <div style="font-weight:700">Name</div>
+            <input type="text" id="contact-name" name="name" placeholder="Your name" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #e6e9ee" />
+          </label>
+          <label>
+            <div style="font-weight:700;margin-top:10px">Email</div>
+            <input type="email" id="contact-email" name="email" placeholder="you@example.com" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #e6e9ee" />
+          </label>
+          <label>
+            <div style="font-weight:700;margin-top:10px">Message</div>
+            <textarea id="contact-msg" name="message" rows="4" placeholder="Short note (demo requests, integration questions)" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #e6e9ee"></textarea>
+          </label>
+
+          <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+            <button class="btn btn-primary" id="send-contact">Send</button>
+            <div class="muted" id="contact-status" aria-live="polite"></div>
+          </div>
+          <small class="muted" style="margin-top:10px;display:block">We respect privacy. No personal info will be shared.</small>
+        </form>
+
+        <div class="card" aria-hidden="false">
+          <h3>Press & partnerships</h3>
+          <p class="muted">For enterprise enquiries and partnerships, use the contact form and select "Contact Sales" or request a secure demo. We remain an anonymous tech collective dedicated to privacy-first design.</p>
+
+          <h4 style="margin-top:12px">Quick links</h4>
+          <ul class="features" style="margin-top:6px">
+            <li><a href="#privacy" style="color:var(--muted);text-decoration:none">Privacy policy (placeholder)</a></li>
+            <li><a href="#terms" style="color:var(--muted);text-decoration:none">Terms & conditions</a></li>
+            <li><a href="#docs" style="color:var(--muted);text-decoration:none">Developer docs</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal: Checkout (mock) -->
+    <div class="modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title" aria-hidden="true">
+      <div class="modal-card" role="document">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div>
+            <h3 id="checkout-title" style="margin:0">Checkout — <span id="checkout-product">Product</span></h3>
+            <div class="muted" style="font-size:13px">Secure payment via <strong>Wonderfly</strong> (demo)</div>
+          </div>
+          <button class="close-btn" id="close-modal" aria-label="Close checkout">✕</button>
+        </div>
+
+        <form id="checkout-form" onsubmit="return false;">
+          <label style="display:block;margin-bottom:8px">
+            <div style="font-weight:700;font-size:13px">Email</div>
+            <input type="email" id="checkout-email" required placeholder="you@example.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ee" />
+          </label>
+
+          <label style="display:block;margin-bottom:8px">
+            <div style="font-weight:700;font-size:13px">Plan</div>
+            <select id="checkout-plan" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ee">
+              <option value="monthly">Monthly - $9</option>
+              <option value="yearly">Yearly - $90</option>
+            </select>
+          </label>
+
+          <fieldset style="border:1px dashed #e6e9ee;padding:10px;border-radius:8px;margin-bottom:10px">
+            <legend style="font-weight:700">Payment (demo)</legend>
+            <div class="muted" style="font-size:13px">This is a mock payment UI. Replace with your gateway integration (e.g. Stripe Elements, PayPal JS SDK).</div>
+            <label style="display:block;margin-top:8px">
+              <div style="font-size:13px">Card number</div>
+              <input type="text" id="card-number" placeholder="4242 4242 4242 4242" autocomplete="cc-number" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ee" />
+            </label>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <input type="text" id="card-exp" placeholder="MM/YY" style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6e9ee" />
+              <input type="text" id="card-cvc" placeholder="CVC" style="width:96px;padding:10px;border-radius:8px;border:1px solid #e6e9ee" />
+            </div>
+          </fieldset>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <div id="checkout-error" class="muted" aria-live="polite"></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+              <button class="btn btn-primary" id="modal-pay">Pay</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+      <div class="muted">© <span id="year"></span> Tech Wonder — anonymous collective</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#privacy" class="muted">Privacy</a>
+        <a href="#terms" class="muted">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts: modular, progressive enhancement -->
+  <script>
+  (function(){
+    // Utilities
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Product metadata (client-side catalogue)
+    const PRODUCTS = {
+      wonderfly: { id: 'wonderfly', title: 'Wonderfly', price: 0, desc: 'Payment orchestration' },
+      strawberry: { id: 'strawberry', title: "Strawberry'sGPT", price: 29, desc: 'Support and website chatbots' },
+      game: { id: 'game', title: 'Game Portal', price: 19, desc: 'Host and monetize games' },
+      stacking: { id: 'stacking', title: 'Stacking Platform', price: 14, desc: 'Rewards & stacking subscriptions' },
+      starter: { id: 'starter', title: 'Starter Plan', price: 9 },
+      pro: { id: 'pro', title: 'Pro Plan', price: 49 }
+    };
+
+    // Modal controls
+    const modal = $('#checkout-modal');
+    const checkoutProductEl = $('#checkout-product');
+    const checkoutError = $('#checkout-error');
+
+    function openCheckout(productId){
+      const product = PRODUCTS[productId] || {title: productId, price: 0};
+      checkoutProductEl.textContent = product.title || productId;
+      // reset fields
+      $('#checkout-email').value = '';
+      $('#card-number').value = '';
+      $('#card-exp').value = '';
+      $('#card-cvc').value = '';
+      $('#checkout-error').textContent = '';
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      // focus first input
+      setTimeout(()=> $('#checkout-email').focus(), 120);
+      // set plan defaults for product (optional)
+      if(productId === 'wonderfly') $('#checkout-plan').value = 'monthly';
+    }
+
+    function closeCheckout(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    // Attach click handlers to product buttons
+    document.querySelectorAll('[data-product]').forEach(btn=>{
+      btn.addEventListener('click', e => {
+        const pid = btn.dataset.product;
+        openCheckout(pid);
+      });
+    });
+
+    // Info buttons - show a small inline dialog (progressive enhancement)
+    document.querySelectorAll('[data-product-info]').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const pid = btn.dataset.productInfo;
+        const product = PRODUCTS[pid] || {title: pid, desc:'More info coming soon.'};
+        alert(product.title + "\\n\\n" + (product.desc || 'No description'));
+      });
+    });
+
+    // Modal close/cancel
+    $('#close-modal').addEventListener('click', closeCheckout);
+    $('#modal-cancel').addEventListener('click', (e) => { e.preventDefault(); closeCheckout(); });
+
+    // Basic (mock) payment flow
+    $('#modal-pay').addEventListener('click', async (e) => {
+      e.preventDefault();
+      checkoutError.textContent = '';
+      const email = $('#checkout-email').value.trim();
+      const card = $('#card-number').value.replace(/\s+/g,'');
+      const exp = $('#card-exp').value.trim();
+      const cvc = $('#card-cvc').value.trim();
+
+      // Simple client-side validation (server must do real validation)
+      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        checkoutError.textContent = 'Please provide a valid email.';
+        return;
+      }
+      if(!card || !/^\d{12,19}$/.test(card)){
+        checkoutError.textContent = 'Enter a valid card number (demo).';
+        return;
+      }
+      // Simulate network latency and success/failure
+      $('#modal-pay').textContent = 'Processing…';
+      $('#modal-pay').disabled = true;
+      try {
+        await new Promise(r => setTimeout(r, 900)); // simulate process
+        // Mock "tokenization" result
+        const token = 'tok_demo_' + Math.random().toString(36).slice(2,10);
+        // In production: send token + email + product to your server to create a charge/subscription
+        // Example: fetch('/api/checkout', {method:'POST', body: JSON.stringify({token,email,product,plan})})
+        console.info('Mock payment token:', token);
+
+        // show success, close modal
+        alert('Payment successful (demo). Token: ' + token + '\\n\\nRemember: replace this mock flow with your payment provider before going live.');
+        closeCheckout();
+      } catch(err){
+        checkoutError.textContent = 'Payment failed. Try again.';
+      } finally {
+        $('#modal-pay').textContent = 'Pay';
+        $('#modal-pay').disabled = false;
+      }
+    });
+
+    // Contact form: simulate send
+    $('#send-contact').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const name = $('#contact-name').value.trim();
+      const email = $('#contact-email').value.trim();
+      const msg = $('#contact-msg').value.trim();
+      const status = $('#contact-status');
+      status.textContent = '';
+      if(!name || !email) { status.textContent = 'Please add name and email.'; return; }
+      status.textContent = 'Sending…';
+      setTimeout(()=> {
+        status.textContent = 'Thanks — message sent (demo). We will contact you at ' + email + '.';
+        // In production: POST to your serverless endpoint or third-party form handler.
+        $('#contact-form').reset();
+      }, 800);
+    });
+
+    // Book demo & contact enterprise quick handlers
+    $('#book-demo').addEventListener('click', (e) => {
+      window.location.hash = '#contact';
+      $('#contact-name').focus();
+      $('#contact-status').textContent = 'Select demo in message.';
+    });
+    $('#contact-enterprise').addEventListener('click', (e) => {
+      window.location.hash = '#contact';
+      $('#contact-status').textContent = 'Requesting enterprise contact…';
+    });
+
+    // Basic keyboard accessibility: close modal on ESC
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeCheckout();
+    });
+
+    // Progressive enhancement note: analytics, error logging, and real payment provider integrations should be added on server/secure environment.
+  })();
+  </script>
+
+  <!-- Small guidance for deployment (included in page as comment for quick access) -->
+  <!--
+    Deployment checklist (short):
+      1. Replace placeholder assets (logo, CDN script URLs).
+      2. Replace mock checkout with a secure provider (Stripe Elements, PayPal JS SDK, Braintree, etc.)
+         - Never handle raw card data on your server unless you are PCI-compliant.
+         - Use tokenization: create tokens client-side and send tokens to your server for charging.
+      3. Add TLS (HTTPS) and HSTS headers on the host.
+      4. Add CSP, secure cookies, and privacy policy pages.
+      5. Implement server-side docs & SDKs, webhooks, and backend authentication for webhooks.
+      6. Consider accessibility audit and automated tests.
+  -->
+
+</body>
+</html>
