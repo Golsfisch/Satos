@@ -3,74 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Wonder — Wonderfly, Strawberry'sGPT, Game Portal, Stacking, Chatbot</title>
+<title>Tech Wonder — Classic 7-Page Layout</title>
 <style>
-/* Classic CSS - no variables */
+/* Body & Layout */
 body {
-    margin: 0;
+    margin:0;
     font-family: Arial, sans-serif;
-    background-color: #0b2a4e;
-    color: #f0f0f0;
+    background-color:#0b2a4e;
+    color:#f0f0f0;
 }
-a {color: #9aa0b0; text-decoration: none;}
-a:hover {color: #ff6b8a;}
-header, footer {background-color: #1f2a3a; padding: 15px;}
-header a.brand {font-weight: bold; font-size: 20px;}
-nav {margin-top:10px;}
-nav a {margin-right: 15px; font-size: 14px;}
-.container {width: 90%; max-width: 1000px; margin: 20px auto;}
-.hero, .products, .pricing {margin-bottom: 30px;}
-.hero {padding: 20px; background-color: #1f2a3a; border-radius: 10px;}
-.hero h1 {margin-top: 0;}
-.button {padding: 10px 15px; border:none; border-radius:5px; cursor:pointer; margin-right:5px;}
-.primary {background-color:#ff6b8a; color:white;}
-.ghost {background-color:transparent; border:1px solid #9aa0b0; color:#f0f0f0;}
-.card {background-color: #1f2a3a; padding:15px; border-radius:8px; margin-bottom:15px;}
-.card h3 {margin-top:0;}
-ul {padding-left:20px; margin:5px 0;}
-footer {text-align:center; color:#9aa0b0; font-size:14px; margin-top:20px;}
-.dark-toggle {float:right; cursor:pointer; padding:5px 10px; border:1px solid #9aa0b0; border-radius:5px; background-color:#1f2a3a;}
-@media (max-width:600px){.hero, .card {padding:10px;}}
+#sidebar {
+    position: fixed;
+    left:0; top:0; bottom:0;
+    width:180px;
+    background:#1f2a3a;
+    padding-top:20px;
+    display:flex;
+    flex-direction:column;
+}
+#sidebar button {
+    background:none;
+    border:none;
+    color:#9aa0b0;
+    padding:12px 20px;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+}
+#sidebar button:hover, #sidebar button.active {
+    background:#ff6b8a;
+    color:white;
+}
+.content {
+    margin-left:200px;
+    padding:20px;
+}
+section.page {
+    display:none;
+}
+section.page.active {
+    display:block;
+}
+h1,h2,h3 {margin-top:0;}
+.button {padding:8px 12px; border-radius:5px; border:none; cursor:pointer; margin-top:5px;}
+.primary {background:#ff6b8a; color:white;}
+.ghost {background:transparent; border:1px solid #9aa0b0; color:#f0f0f0;}
+footer {margin-top:30px; text-align:center; font-size:14px; color:#9aa0b0;}
+@media(max-width:600px){
+    #sidebar {position:relative;width:100%;display:flex;flex-direction:row;}
+    .content {margin-left:0;}
+}
 </style>
 </head>
-<body id="body">
+<body>
 
-<header>
-    <a href="#" class="brand">Tech Wonder</a>
-    <span class="dark-toggle" id="toggleTheme">Toggle Mode</span>
-    <nav>
-        <a href="#products">Products</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+<div id="sidebar">
+    <button class="tab-btn active" data-page="home">Home</button>
+    <button class="tab-btn" data-page="products">Products</button>
+    <button class="tab-btn" data-page="pricing">Pricing</button>
+    <button class="tab-btn" data-page="game">Game Portal</button>
+    <button class="tab-btn" data-page="stacking">Stacking Platform</button>
+    <button class="tab-btn" data-page="chatbots">Chatbots</button>
+    <button class="tab-btn" data-page="contact">Contact</button>
+</div>
 
-<div class="container">
+<div class="content">
 
-<section class="hero">
-    <h1>Build & sell with confidence</h1>
-    <p>Tech Wonder combines pre-launch payments (Wonderfly), AI bots (Strawberry'sGPT), games, stacking, and chatbots.</p>
-    <button class="button primary" onclick="alert('Wonderfly Pre-launch! Payment system in work.')">Get Wonderfly (Pre-launch)</button>
-    <button class="button ghost" onclick="alert('Contact us for a demo.')">Book a demo</button>
-    <div style="margin-top:10px; padding:10px; background:#0b3a5a; border-radius:5px;">
+<section id="home" class="page active">
+    <h1>Welcome to Tech Wonder</h1>
+    <p>Build & sell with confidence — Wonderfly pre-launch, Strawberry'sGPT, games, stacking, chatbots.</p>
+    <button class="button primary" onclick="alert('Wonderfly Pre-launch!')">Get Wonderfly (Pre-launch)</button>
+    <button class="button ghost" onclick="alert('Contact us for demo')">Book a demo</button>
+    <div style="margin-top:15px; background:#0b3a5a; padding:10px; border-radius:5px;">
         <strong>Strawberry'sGPT</strong>
-        <p>Pre-trained support assistants, live chat, and custom flows. Integrates with Wonderfly pre-launch.</p>
+        <p>Pre-trained support assistants, live chat, and custom flows. Integrates with Wonderfly.</p>
     </div>
 </section>
 
-<section id="products" class="products">
+<section id="products" class="page">
     <h2>Products</h2>
-    <div class="card">
+    <div>
         <h3>Wonderfly — Payment System</h3>
         <p>Status: Pre-launch</p>
         <ul>
             <li>Hosted checkout / API-first</li>
             <li>Subscriptions & refunds</li>
-            <li>PCI-compliant integrations</li>
+            <li>PCI-compliant</li>
         </ul>
         <button class="button primary" onclick="alert('Wonderfly Pre-launch!')">Get Pre-launch</button>
     </div>
-    <div class="card">
+    <div>
         <h3>Strawberry'sGPT — Support & Chatbots</h3>
         <ul>
             <li>Custom intents & routing</li>
@@ -79,12 +101,94 @@ footer {text-align:center; color:#9aa0b0; font-size:14px; margin-top:20px;}
         </ul>
         <button class="button primary" onclick="alert('Strawberry\'sGPT purchase coming soon')">Buy</button>
     </div>
-    <div class="card">
-        <h3>Game Portal — Hosted Game Site</h3>
+    <div>
+        <h3>Game Portal</h3>
         <p>Status: In work</p>
         <ul>
             <li>Host HTML5 games</li>
-            <li>In-game purchases via Wonderfly</li>
+            <li>In-game purchases</li>
             <li>Analytics & moderation</li>
         </ul>
-        <button class=
+        <button class="button ghost" onclick="alert('Game Portal in work')">Stay tuned</button>
+    </div>
+    <div>
+        <h3>Stacking Platform</h3>
+        <p>Status: Maybe</p>
+        <ul>
+            <li>Tiered subscriptions & rewards</li>
+            <li>API & embeddable widgets</li>
+            <li>Secure payouts</li>
+        </ul>
+        <button class="button ghost" onclick="alert('Stacking maybe')">Maybe later</button>
+    </div>
+    <div>
+        <h3>Chatbot — Custom AI assistants</h3>
+        <ul>
+            <li>Custom flows & intents</li>
+            <li>Integration with Wonderfly</li>
+            <li>Embeddable widgets</li>
+        </ul>
+        <button class="button primary" onclick="alert('Chatbot coming soon')">Learn more</button>
+    </div>
+</section>
+
+<section id="pricing" class="page">
+    <h2>Pricing</h2>
+    <div>
+        <h3>Starter Plan</h3>
+        <p>$9/month</p>
+        <ul>
+            <li>Basic widgets</li>
+            <li>Up to 10k events/month</li>
+            <li>Email support</li>
+        </ul>
+        <button class="button primary" onclick="alert('Start Starter Plan')">Start</button>
+    </div>
+</section>
+
+<section id="game" class="page">
+    <h2>Game Portal</h2>
+    <p>Status: In work</p>
+    <p>Host HTML5 games, leaderboards, achievements, and wallets integrated with Wonderfly.</p>
+</section>
+
+<section id="stacking" class="page">
+    <h2>Stacking Platform</h2>
+    <p>Status: Maybe</p>
+    <p>Subscription stacking, rewards, tiered access, and community integrations.</p>
+</section>
+
+<section id="chatbots" class="page">
+    <h2>Chatbots</h2>
+    <p>Other AI assistants separate from Strawberry'sGPT. Integrate with websites or apps for support or sales.</p>
+</section>
+
+<section id="contact" class="page">
+    <h2>Contact / Support</h2>
+    <p>Contact us for early access or product questions.</p>
+    <button class="button primary" onclick="alert('Contact form coming soon')">Contact</button>
+</section>
+
+<footer>
+<p>© <span id="year"></span> Tech Wonder — anonymous collective</p>
+</footer>
+
+<script>
+// Minimal JS for tab navigation
+document.getElementById('year').textContent = new Date().getFullYear();
+var tabs = document.querySelectorAll('.tab-btn');
+var pages = document.querySelectorAll('section.page');
+
+tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        var page = tab.getAttribute('data-page');
+        pages.forEach(p => p.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
