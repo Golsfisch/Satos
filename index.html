@@ -3,169 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Wonder — Classic 7-Page Layout</title>
+<title>Tech Wonder — High-End Classic Layout</title>
 <style>
-/* Body & Layout */
+/* Reset & base */
+body, h1,h2,h3,p,ul {margin:0; padding:0;}
+ul {list-style:none;}
 body {
-    margin:0;
     font-family: Arial, sans-serif;
-    background-color:#0b2a4e;
+    background:#0b2a4e;
     color:#f0f0f0;
+    display:flex;
 }
 #sidebar {
-    position: fixed;
-    left:0; top:0; bottom:0;
-    width:180px;
+    width:200px;
     background:#1f2a3a;
-    padding-top:20px;
     display:flex;
     flex-direction:column;
+    padding-top:20px;
+    min-height:100vh;
 }
 #sidebar button {
-    background:none;
     border:none;
+    background:none;
     color:#9aa0b0;
-    padding:12px 20px;
     text-align:left;
+    padding:15px 20px;
     cursor:pointer;
-    font-size:14px;
+    font-size:15px;
+    transition:0.3s;
 }
-#sidebar button:hover, #sidebar button.active {
-    background:#ff6b8a;
-    color:white;
-}
+#sidebar button:hover, #sidebar button.active {background:#ff6b8a; color:white;}
+#sidebar .toggle {margin-top:auto; padding:12px 20px; border-top:1px solid #555; cursor:pointer; text-align:center; font-weight:bold;}
 .content {
-    margin-left:200px;
+    flex:1;
+    padding:30px;
+    max-width:1000px;
+}
+section.page {display:none; animation:fadeIn 0.4s;}
+section.page.active {display:block;}
+@keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
+h1,h2,h3 {margin-bottom:10px;}
+.card {
+    background:#1f2a3a;
     padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-section.page {
-    display:none;
-}
-section.page.active {
-    display:block;
-}
-h1,h2,h3 {margin-top:0;}
-.button {padding:8px 12px; border-radius:5px; border:none; cursor:pointer; margin-top:5px;}
+.card:hover {transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,0,0,0.6);}
+.button {padding:10px 16px; border-radius:8px; border:none; cursor:pointer; margin-top:10px; transition:0.3s;}
 .primary {background:#ff6b8a; color:white;}
+.primary:hover {background:#ff4d70;}
 .ghost {background:transparent; border:1px solid #9aa0b0; color:#f0f0f0;}
-footer {margin-top:30px; text-align:center; font-size:14px; color:#9aa0b0;}
-@media(max-width:600px){
-    #sidebar {position:relative;width:100%;display:flex;flex-direction:row;}
-    .content {margin-left:0;}
+.ghost:hover {background:#333;}
+.products-grid {
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+.products-grid .card {flex:1 1 calc(50% - 20px);}
+footer {text-align:center; color:#9aa0b0; margin-top:40px; font-size:14px;}
+/* Dark mode */
+body.light {background:#f3f3f3; color:#0b2a4e;}
+body.light .card {background:#ffffff; color:#0b2a4e; box-shadow:0 8px 20px rgba(0,0,0,0.12);}
+body.light #sidebar {background:#e0e0e0;}
+body.light #sidebar button {color:#555;}
+body.light #sidebar button.active, body.light #sidebar button:hover {background:#ff6b8a; color:white;}
+body.light .ghost {border:1px solid #555; color:#0b2a4e;}
+body.light .ghost:hover {background:#ddd;}
+body.light .primary:hover {background:#ff4d70;}
+@media(max-width:800px){
+    #sidebar {position:relative;width:100%; flex-direction:row; overflow-x:auto;}
+    .content {margin:0; padding:20px;}
+    .products-grid .card {flex:1 1 100%;}
 }
 </style>
 </head>
-<body>
+<body id="body">
 
 <div id="sidebar">
     <button class="tab-btn active" data-page="home">Home</button>
     <button class="tab-btn" data-page="products">Products</button>
     <button class="tab-btn" data-page="pricing">Pricing</button>
     <button class="tab-btn" data-page="game">Game Portal</button>
-    <button class="tab-btn" data-page="stacking">Stacking Platform</button>
+    <button class="tab-btn" data-page="stacking">Stacking</button>
     <button class="tab-btn" data-page="chatbots">Chatbots</button>
     <button class="tab-btn" data-page="contact">Contact</button>
+    <button class="toggle" id="themeToggle">ON/OFF</button>
 </div>
 
 <div class="content">
 
 <section id="home" class="page active">
     <h1>Welcome to Tech Wonder</h1>
-    <p>Build & sell with confidence — Wonderfly pre-launch, Strawberry'sGPT, games, stacking, chatbots.</p>
-    <button class="button primary" onclick="alert('Wonderfly Pre-launch!')">Get Wonderfly (Pre-launch)</button>
-    <button class="button ghost" onclick="alert('Contact us for demo')">Book a demo</button>
-    <div style="margin-top:15px; background:#0b3a5a; padding:10px; border-radius:5px;">
-        <strong>Strawberry'sGPT</strong>
-        <p>Pre-trained support assistants, live chat, and custom flows. Integrates with Wonderfly.</p>
-    </div>
+    <p>High-end classic layout with placeholders for products, ready for expansion.</p>
+    <button class="button primary" onclick="alert('Wonderfly Pre-launch!')">Get Wonderfly</button>
+    <button class="button ghost" onclick="alert('Book demo')">Book Demo</button>
 </section>
 
 <section id="products" class="page">
     <h2>Products</h2>
-    <div>
-        <h3>Wonderfly — Payment System</h3>
-        <p>Status: Pre-launch</p>
-        <ul>
-            <li>Hosted checkout / API-first</li>
-            <li>Subscriptions & refunds</li>
-            <li>PCI-compliant</li>
-        </ul>
-        <button class="button primary" onclick="alert('Wonderfly Pre-launch!')">Get Pre-launch</button>
-    </div>
-    <div>
-        <h3>Strawberry'sGPT — Support & Chatbots</h3>
-        <ul>
-            <li>Custom intents & routing</li>
-            <li>Human handoff + web channels</li>
-            <li>Billing via Wonderfly</li>
-        </ul>
-        <button class="button primary" onclick="alert('Strawberry\'sGPT purchase coming soon')">Buy</button>
-    </div>
-    <div>
-        <h3>Game Portal</h3>
-        <p>Status: In work</p>
-        <ul>
-            <li>Host HTML5 games</li>
-            <li>In-game purchases</li>
-            <li>Analytics & moderation</li>
-        </ul>
-        <button class="button ghost" onclick="alert('Game Portal in work')">Stay tuned</button>
-    </div>
-    <div>
-        <h3>Stacking Platform</h3>
-        <p>Status: Maybe</p>
-        <ul>
-            <li>Tiered subscriptions & rewards</li>
-            <li>API & embeddable widgets</li>
-            <li>Secure payouts</li>
-        </ul>
-        <button class="button ghost" onclick="alert('Stacking maybe')">Maybe later</button>
-    </div>
-    <div>
-        <h3>Chatbot — Custom AI assistants</h3>
-        <ul>
-            <li>Custom flows & intents</li>
-            <li>Integration with Wonderfly</li>
-            <li>Embeddable widgets</li>
-        </ul>
-        <button class="button primary" onclick="alert('Chatbot coming soon')">Learn more</button>
+    <div class="products-grid">
+        <div class="card">
+            <h3>Product 1</h3>
+            <p>Status: Placeholder</p>
+            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
+            <button class="button primary">Learn More</button>
+        </div>
+        <div class="card">
+            <h3>Product 2</h3>
+            <p>Status: Placeholder</p>
+            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
+            <button class="button primary">Learn More</button>
+        </div>
+        <div class="card">
+            <h3>Product 3</h3>
+            <p>Status: Placeholder</p>
+            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
+            <button class="button primary">Learn More</button>
+        </div>
+        <div class="card">
+            <h3>Product 4</h3>
+            <p>Status: Placeholder</p>
+            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
+            <button class="button primary">Learn More</button>
+        </div>
+        <div class="card">
+            <h3>Product 5</h3>
+            <p>Status: Placeholder</p>
+            <ul><li>Feature 1</li><li>Feature 2</li><li>Feature 3</li></ul>
+            <button class="button primary">Learn More</button>
+        </div>
     </div>
 </section>
 
 <section id="pricing" class="page">
     <h2>Pricing</h2>
-    <div>
+    <div class="card">
         <h3>Starter Plan</h3>
         <p>$9/month</p>
-        <ul>
-            <li>Basic widgets</li>
-            <li>Up to 10k events/month</li>
-            <li>Email support</li>
-        </ul>
-        <button class="button primary" onclick="alert('Start Starter Plan')">Start</button>
+        <ul><li>Basic widgets</li><li>Up to 10k events/month</li><li>Email support</li></ul>
+        <button class="button primary">Start</button>
     </div>
 </section>
 
 <section id="game" class="page">
     <h2>Game Portal</h2>
-    <p>Status: In work</p>
-    <p>Host HTML5 games, leaderboards, achievements, and wallets integrated with Wonderfly.</p>
+    <p>Placeholder for Game Portal content.</p>
 </section>
 
 <section id="stacking" class="page">
     <h2>Stacking Platform</h2>
-    <p>Status: Maybe</p>
-    <p>Subscription stacking, rewards, tiered access, and community integrations.</p>
+    <p>Placeholder for Stacking Platform content.</p>
 </section>
 
 <section id="chatbots" class="page">
     <h2>Chatbots</h2>
-    <p>Other AI assistants separate from Strawberry'sGPT. Integrate with websites or apps for support or sales.</p>
+    <p>Placeholder for Chatbot AI products.</p>
 </section>
 
 <section id="contact" class="page">
-    <h2>Contact / Support</h2>
-    <p>Contact us for early access or product questions.</p>
+    <h2>Contact</h2>
+    <p>Contact form or information goes here.</p>
     <button class="button primary" onclick="alert('Contact form coming soon')">Contact</button>
 </section>
 
@@ -174,11 +174,12 @@ footer {margin-top:30px; text-align:center; font-size:14px; color:#9aa0b0;}
 </footer>
 
 <script>
-// Minimal JS for tab navigation
+// Set year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Tab navigation
 var tabs = document.querySelectorAll('.tab-btn');
 var pages = document.querySelectorAll('section.page');
-
 tabs.forEach(function(tab){
     tab.addEventListener('click', function(){
         tabs.forEach(t => t.classList.remove('active'));
@@ -188,6 +189,11 @@ tabs.forEach(function(tab){
         document.getElementById(page).classList.add('active');
     });
 });
+
+// On/Off dark mode toggle
+document.getElementById('themeToggle').onclick = function(){
+    document.body.classList.toggle('light');
+};
 </script>
 
 </body>
